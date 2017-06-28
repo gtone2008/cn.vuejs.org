@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <title>组件 - Vue.js</title>
         <meta charset="utf-8">
@@ -169,7 +169,7 @@
         <div class="main-sponsor">
             <span>赞助者</span><br>
             <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-3.jpg">
+                <img src="/images/upyun-main-4.jpg">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -508,6 +508,19 @@
                     
                     
                     
+                    
+                
+                
+                <li>
+                    <a href="/v2/guide/typescript.html" class="sidebar-link">TypeScript Support</a>
+                </li>
+            
+                
+
+                
+                    
+                    
+                    
                       <li><h3>迁移</h3></li>
                     
                     
@@ -762,7 +775,7 @@ new Vue({
 <p><code>type</code> 也可以是一个自定义构造器函数，使用 <code>instanceof</code> 检测。</p>
 <p>当 prop 验证失败，Vue会在抛出警告 (如果使用的是开发版本)。</p>
 <h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><p>我们知道，父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，应该怎样做？那就是自定义事件！</p>
-<h3 id="使用-v-on-绑定自定义事件"><a href="#使用-v-on-绑定自定义事件" class="headerlink" title="使用 v-on 绑定自定义事件"></a>使用 <code>v-on</code> 绑定自定义事件</h3><p>每个 Vue 实例都实现了<a href="../api/#Instance-Methods-Events">事件接口(Events interface)</a>，即：</p>
+<h3 id="使用-v-on-绑定自定义事件"><a href="#使用-v-on-绑定自定义事件" class="headerlink" title="使用 v-on 绑定自定义事件"></a>使用 <code>v-on</code> 绑定自定义事件</h3><p>每个 Vue 实例都实现了<a href="../api/#实例方法-事件">事件接口(Events interface)</a>，即：</p>
 <ul>
 <li>使用 <code>$on(eventName)</code> 监听事件</li>
 <li>使用 <code>$emit(eventName)</code> 触发事件</li>
@@ -948,7 +961,7 @@ new Vue({
 <ul>
 <li><p><strong>Props</strong> 允许外部环境传递数据给组件</p>
 </li>
-<li><p><strong>Events</strong> 允许组件触发外部环境的副作用</p>
+<li><p><strong>Events</strong> 允许从外部环境在组件内触发副作用</p>
 </li>
 <li><p><strong>Slots</strong> 允许外部环境将额外的内容组合在组件中。</p>
 </li>

@@ -2,17 +2,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-        <title>单文件组件 - Vue.js</title>
+        <title>TypeScript Support - Vue.js</title>
         <meta charset="utf-8">
         <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta property="og:type" content="article">
-        <meta property="og:title" content="单文件组件 - vue.js">
+        <meta property="og:title" content="TypeScript Support - vue.js">
         <meta property="og:description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta property="og:image" content="https://cn.vuejs.org/images/logo.png">
 
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="单文件组件 - vue.js">
+        <meta name="twitter:title" content="TypeScript Support - vue.js">
         <meta name="twitter:description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="twitter:image" content="https://cn.vuejs.org/images/logo.png">
 
@@ -434,7 +434,7 @@
                 
                 
                 <li>
-                    <a href="/v2/guide/single-file-components.html" class="sidebar-link current">单文件组件</a>
+                    <a href="/v2/guide/single-file-components.html" class="sidebar-link">单文件组件</a>
                 </li>
             
                 
@@ -512,7 +512,7 @@
                 
                 
                 <li>
-                    <a href="/v2/guide/typescript.html" class="sidebar-link">TypeScript Support</a>
+                    <a href="/v2/guide/typescript.html" class="sidebar-link current">TypeScript Support</a>
                 </li>
             
                 
@@ -590,63 +590,53 @@
 </div>
 
 
-<div class="content guide with-sidebar single-file-components-guide">
+<div class="content guide with-sidebar typescript-guide">
     
-      <h1>单文件组件</h1>
+      <h1>TypeScript Support</h1>
     
     
-    <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在很多Vue项目中，我们使用 <code>Vue.component</code> 来定义全局组件，紧接着用 <code>new Vue({ el: &#39;#container &#39;})</code> 在每个页面内指定一个容器元素。</p>
-<p>这种方式在很多中小规模的项目中运作的很好，在这些项目里 JavaScript 只被用来加强特定的视图。但当在更复杂的项目中，或者你的前端完全由 JavaScript 驱动的时候，下面这些缺点将变得非常明显：</p>
+    <h2 id="2-2-版本中针对-TS-Webpack-2-用户的重要改动"><a href="#2-2-版本中针对-TS-Webpack-2-用户的重要改动" class="headerlink" title="2.2 版本中针对 TS + Webpack 2 用户的重要改动"></a>2.2 版本中针对 TS + Webpack 2 用户的重要改动</h2><p>在 Vue 2.2 里，我们引入了新机制，把 dist 文件都作为 ES 模块发布。这在 webpack 2 中属于默认行为。遗憾的是，这个改动会引入一个会破坏兼容性的意外改动。在 TypeScript + webpack 2 里， <code>import Vue = require(&#39;vue&#39;)</code> 现在会返回一个综合的 ES 模块对象，而不是 Vue 对象本身了。</p>
+<p>我们计划在未来把所有的官方类型声明都改成 ES-风格的导出方式（译注：<code>export</code>）。请参阅下面的<a href="#Recommended-Configuration">推荐配置</a>板块，配置一个不易过时的编码方案。</p>
+<h2 id="发布为-NPM-包的官方声明文件"><a href="#发布为-NPM-包的官方声明文件" class="headerlink" title="发布为 NPM 包的官方声明文件"></a>发布为 NPM 包的官方声明文件</h2><p>静态类型系统能帮助你有效防止N多潜在的运行时错误，而且随着你的应用日渐丰满会更加显著。这就是为啥子 Vue 不仅仅为 Vue core 提供了针对 <a href="https://www.typescriptlang.org/" target="_blank" rel="external">TypeScript</a> 的<a href="https://github.com/vuejs/vue/tree/dev/types" target="_blank" rel="external">官方类型声明</a>，还为 <a href="https://github.com/vuejs/vue-router/tree/dev/types" target="_blank" rel="external">Vue Router</a> 和 <a href="https://github.com/vuejs/vuex/tree/dev/types" target="_blank" rel="external">Vuex</a> 也提供了相应的声明文件。</p>
+<p>而且，我们已经把他们<a href="https://unpkg.com/vue/types/" target="_blank" rel="external">发布于 NPM</a>，最新版本的 TypeScript 也知道该如何自己从 NPM 包里解析类型声明。这意味着只要你成功地通过 NPM 安装了，就不再需要任何额外的工具辅助，即可在 Vue 中使用 TypeScript 了。</p>
+<h2 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h2><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// tsconfig.json</span></div><div class="line">&#123;</div><div class="line">  <span class="string">"compilerOptions"</span>: &#123;</div><div class="line">    <span class="comment">// ... 已省略其它选项</span></div><div class="line">    <span class="string">"allowSyntheticDefaultImports"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="string">"lib"</span>: [</div><div class="line">      <span class="string">"dom"</span>,</div><div class="line">      <span class="string">"es5"</span>,</div><div class="line">      <span class="string">"es2015.promise"</span></div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请注意 <code>allowSyntheticDefaultImports</code> 选项允许你使用下列语法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div></pre></td></tr></table></figure>
+<p>而不是这种：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>) <span class="comment">// 注：老语法</span></div></pre></td></tr></table></figure>
+<p>我们更为推荐前者（ES 模块语法），因为他跟原生的 ES 用法更为一致，而且在未来，我们计划把官方声明全部搬迁到 ES 风格的导出方式。</p>
+<p>另外呢，如果你是搭配 webpack 2 使用 TypeScript，那么以下配置也很推荐：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"compilerOptions"</span>: &#123;</div><div class="line">    <span class="comment">// ... 已省略其他配置</span></div><div class="line">    <span class="string">"module"</span>: <span class="string">"es2015"</span>,</div><div class="line">    <span class="string">"moduleResolution"</span>: <span class="string">"node"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这句选项告诉 TypeScript 不要处理 ES 模块引入语句（译注：import .. from ..）。这样 webpack 2 就可以充分利用其基于 ES 模块的 tree-shaking（译注一种在抽象语法树中减除未被使用的死代码的优化技术，简称<code>摇树优化</code>）。</p>
+<p>参阅 <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank" rel="external">TypeScript 编译器选项文档（英）</a> 了解更多。</p>
+<h2 id="使用-Vue-的类型声明"><a href="#使用-Vue-的类型声明" class="headerlink" title="使用 Vue 的类型声明"></a>使用 Vue 的类型声明</h2><p>Vue 的类型声明道出了很多有效的<a href="https://github.com/vuejs/vue/blob/dev/types/index.d.ts" target="_blank" rel="external">类型声明</a>。比如，标记一个导出的组件选项对象(e.g. 在 <code>.vue</code> 文件中)：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue, &#123; ComponentOptions &#125; <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  props: [<span class="string">'message'</span>],</div><div class="line">  template: <span class="string">'&lt;span&gt;&#123;&#123; message &#125;&#125;&lt;/span&gt;'</span></div><div class="line">&#125; <span class="keyword">as</span> ComponentOptions&lt;Vue&gt;</div></pre></td></tr></table></figure>
+<h2 id="Class-风格的-Vue-组件"><a href="#Class-风格的-Vue-组件" class="headerlink" title="Class 风格的 Vue 组件"></a>Class 风格的 Vue 组件</h2><p>我们可以很容易地标记上 Vue 组件选项的类型：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue, &#123; ComponentOptions &#125;  <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"></div><div class="line"><span class="comment">// 声明该组件的类型</span></div><div class="line"><span class="keyword">interface</span> MyComponent <span class="keyword">extends</span> Vue &#123;</div><div class="line">  message: <span class="built_in">string</span></div><div class="line">  onClick (): <span class="built_in">void</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  template: <span class="string">'&lt;button @click="onClick"&gt;Click!&lt;/button&gt;'</span>,</div><div class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      message: <span class="string">'Hello!'</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  methods: &#123;</div><div class="line">    onClick: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="comment">// TypeScript 知道 `this` 是类型为 MyComponent 的对象</span></div><div class="line">      <span class="comment">// 因此 `this.message` 会是一个 string</span></div><div class="line">      <span class="built_in">window</span>.alert(<span class="keyword">this</span>.message)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// 我们需要显式地标注导出选项对象为 MyComponent 类型</span></div><div class="line">&#125; <span class="keyword">as</span> ComponentOptions&lt;MyComponent&gt;</div></pre></td></tr></table></figure>
+<p>不幸的是，这里也有一些局限性：</p>
 <ul>
-<li><strong>全局定义(Global definitions)</strong>  强制要求每个 component 中的命名不得重复</li>
-<li><strong>字符串模板(String templates)</strong>  缺乏语法高亮，在 HTML 有多行的时候，需要用到丑陋的 <code>\</code></li>
-<li><strong>不支持CSS(No CSS support)</strong>  意味着当 HTML 和 JavaScript 组件化时，CSS 明显被遗漏</li>
-<li><strong>没有构建步骤(No build step)</strong>  限制只能使用 HTML 和 ES5 JavaScript,  而不能使用预处理器，如 Pug (formerly Jade) 和 Babel</li>
-</ul>
-<p>文件扩展名为 <code>.vue</code> 的 <strong>single-file components(单文件组件)</strong> 为以上所有问题提供了解决方法，并且还可以使用 Webpack 或 Browserify 等构建工具。</p>
-<p>这是一个文件名为 <code>Hello.vue</code> 的简单实例：</p>
-<p><img src="/images/vue-component.png" style="display: block; margin: 30px auto"></p>
-<p>现在我们获得：</p>
-<ul>
-<li><a href="https://github.com/vuejs/awesome-vue#syntax-highlighting" target="_blank" rel="external">完整语法高亮</a></li>
-<li><a href="https://webpack.github.io/docs/commonjs.html" target="_blank" rel="external">CommonJS 模块</a></li>
-<li><a href="https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md" target="_blank" rel="external">组件化的 CSS</a></li>
-</ul>
-<p>正如我们说过的，我们可以使用预处理器来构建简洁和功能更丰富的组件，比如 Jade，Babel (with ES2015 modules)，和 Stylus。</p>
-<p><img src="/images/vue-component-with-preprocessors.png" style="display: block; margin: 30px auto"></p>
-<p>这些特定的语言只是例子，你可以只是简单地使用 Babel，TypeScript，SCSS，PostCSS - 或者其他任何能够帮助你提高生产力的预处理器。</p>
-<!-- TODO: include CSS modules once it's supported in vue-loader 9.x -->
-<h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><h3 id="针对刚接触-JavaScript-模块开发系统的用户"><a href="#针对刚接触-JavaScript-模块开发系统的用户" class="headerlink" title="针对刚接触 JavaScript 模块开发系统的用户"></a>针对刚接触 JavaScript 模块开发系统的用户</h3><p>有了 <code>.vue</code> 组件，我们就进入了高级 JavaScript 应用领域。如果你没有准备好的话，意味着还需要学会使用一些附加的工具：</p>
-<ul>
-<li><p><strong>Node Package Manager (NPM)</strong>: 阅读 <a href="https://docs.npmjs.com/getting-started/what-is-npm" target="_blank" rel="external">Getting Started guide</a> 直到 <em>10: Uninstalling global packages</em>章节.</p>
+<li><p><strong>TypeScript 不能推断出 Vue API 里的所有类型</strong>。比如，他们不知道我们 <code>data</code> 函数中返回的 <code>message</code> 属性会被添加到 <code>MyComponent</code> 实例中。这意味着如果我们给 <code>message</code> 赋值一个数字或者布尔值，linter 和 编译器并不能抛出一个“该值应该是字符串”的错误。</p>
 </li>
-<li><p><strong>Modern JavaScript with ES2015/16</strong>: 阅读 Babel 的 <a href="https://babeljs.io/docs/learn-es2015/" target="_blank" rel="external">Learn ES2015 guide</a>. 你不需要立刻记住每一个方法，但是你可以保留这个页面以便后期参考。</p>
+<li><p>因为第一条的局限, <strong>如上的类型注释可能会很罗嗦</strong>。TypeScript 不能正确推导 <code>message</code> 的类型，是唯一迫使我们手动声明它是 string 的原因。</p>
 </li>
 </ul>
-<p>在你花一些时日了解这些资源之后，我们建议你参考 <a href="https://github.com/vuejs-templates/webpack-simple" target="_blank" rel="external">webpack-simple</a> 。只要遵循指示，你就能很快地运行一个用到 <code>.vue</code> 组件，ES2015 和  热重载( hot-reloading ) 的 Vue 项目!</p>
-<p>这个模板使用 <a href="https://webpack.github.io/" target="_blank" rel="external">Webpack</a>，一个能将多个模块打包成最终应用的模块打包工具。 <a href="https://www.youtube.com/watch?v=WQue1AN93YU" target="_blank" rel="external">这个视频</a> 介绍了Webpack的更多相关信息。 学习了这些基础知识后， 你可能想看看 <a href="https://egghead.io/courses/using-webpack-for-production-javascript-applications" target="_blank" rel="external">这个在 Egghead.io上的 高级 Webpack 课程</a>.</p>
-<p>在 Webpack中，每个模块被打包到 bundle 之前都由一个相应的 “loader” 来转换，Vue 也提供 <a href="https://github.com/vuejs/vue-loader" target="_blank" rel="external">vue-loader</a> 插件来执行 <code>.vue</code> 单文件组件 的转换. 这个 <a href="https://github.com/vuejs-templates/webpack-simple" target="_blank" rel="external">webpack-simple</a> 模板已经为你准备好了所有的东西，但是如果你想了解更多关于 <code>.vue</code> 组件和 Webpack 如何一起运转的信息，你可以阅读 <a href="https://vue-loader.vuejs.org" target="_blank" rel="external">vue-loader 的文档</a>。</p>
-<h3 id="针对高级用户"><a href="#针对高级用户" class="headerlink" title="针对高级用户"></a>针对高级用户</h3><p>无论你更钟情 Webpack 或是 Browserify，我们为简单的和更复杂的项目都提供了一些文档模板。我们建议浏览 <a href="https://github.com/vuejs-templates" target="_blank" rel="external">github.com/vuejs-templates</a>，找到你需要的部分，然后参考 README 中的说明，使用 <a href="https://github.com/vuejs/vue-cli" target="_blank" rel="external">vue-cli</a> 工具生成新的项目。</p>
-<p>模板中使用 <a href="https://webpack.github.io/" target="_blank" rel="external">Webpack</a> ，一个模块加载器加载多个模块然后构建成最终应用。为了进一步了解 Webpack, 可以看 <a href="https://www.youtube.com/watch?v=WQue1AN93YU" target="_blank" rel="external">官方介绍视频</a>。如果你有基础，可以看 <a href="https://egghead.io/courses/using-webpack-for-production-javascript-applications" target="_blank" rel="external">在 Egghead.io 上的 Webpack 进阶教程</a>。</p>
-<hr>
-<blockquote>
-<p>原文： <a href="http://vuejs.org/guide/single-file-components.html" target="_blank" rel="external">http://vuejs.org/guide/single-file-components.html</a></p>
-</blockquote>
-<hr>
+<p>好消息是，<a href="https://github.com/vuejs/vue-class-component" target="_blank" rel="external">vue-class-component</a> 能解决以上的两个问题。这是一个官方的姐妹库，它能允许你把组件声明为一个原生的 JavaScript 类，外加一个 <code>@Component</code> 的修饰符。为了举例说明，我们把上面的栗子重写一下吧:</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Component <span class="keyword">from</span> <span class="string">'vue-class-component'</span></div><div class="line"></div><div class="line"><span class="comment">// @Component 修饰符注明了此类为一个 Vue 组件</span></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  <span class="comment">// 所有的组件选项都可以放在这里</span></div><div class="line">  template: <span class="string">'&lt;button @click="onClick"&gt;Click!&lt;/button&gt;'</span></div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> MyComponent <span class="keyword">extends</span> Vue &#123;</div><div class="line">  <span class="comment">// 初始数据可以直接声明为实例的属性</span></div><div class="line">  message: <span class="built_in">string</span> = <span class="string">'Hello!'</span></div><div class="line"></div><div class="line">  <span class="comment">// 组件方法也可以直接声明为实例的方法</span></div><div class="line">  onClick (): <span class="built_in">void</span> &#123;</div><div class="line">    <span class="built_in">window</span>.alert(<span class="keyword">this</span>.message)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有了这种备选语法，我们的组件定义不仅仅更加短小了，而且 TypeScript 也能在无需显式的接口声明的情况下，正确推断 <code>message</code> 和 <code>onClick</code> 的类型了呢。这个策略甚至能让你处理计算属性（computed），生命周期钩子以及 render 函数的类型。你可以参阅 <a href="https://github.com/vuejs/vue-class-component#vue-class-component" target="_blank" rel="external">vue-class-component 文档</a>，来了解完整的细节。</p>
 
     
       <div class="guide-links">
         
-          <span>← <a href="/v2/guide/plugins.html">插件</a></span>
+          <span>← <a href="/v2/guide/ssr.html">服务端渲染</a></span>
         
         
-          <span style="float:right"><a href="/v2/guide/deployment.html">生产环境部署</a> →</span>
+          <span style="float:right"><a href="/v2/guide/migration.html">从 Vue 1.x 迁移</a> →</span>
         
       </div>
     
     <div class="footer">
       发现错误？想参与编辑？
-      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/guide/single-file-components.md" target="_blank">
+      <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/guide/typescript.md" target="_blank">
         在 Github 上编辑此页！
       </a>
     </div>

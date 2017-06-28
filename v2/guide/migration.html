@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <title>从 Vue 1.x 迁移 - Vue.js</title>
         <meta charset="utf-8">
@@ -169,7 +169,7 @@
         <div class="main-sponsor">
             <span>赞助者</span><br>
             <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-3.jpg">
+                <img src="/images/upyun-main-4.jpg">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -500,6 +500,19 @@
                 
                 <li>
                     <a href="/v2/guide/ssr.html" class="sidebar-link">服务端渲染</a>
+                </li>
+            
+                
+
+                
+                    
+                    
+                    
+                    
+                
+                
+                <li>
+                    <a href="/v2/guide/typescript.html" class="sidebar-link">TypeScript Support</a>
                 </li>
             
                 
@@ -912,7 +925,7 @@ new Vue({
   <p>运行<a href="https://github.com/vuejs/vue-migration-helper" target="_blank" rel="external">迁移工具</a>找出实例中存在的 <code>v-else</code> 以及 <code>v-show</code>。</p>
 </div>
 
-<h2 id="自定义指令-简化"><a href="#自定义指令-简化" class="headerlink" title="自定义指令 简化"></a>自定义指令 <sup>简化</sup></h2><p>在新版中，指令的使用范围已经大大减小了：现在指令仅仅被用于低级的 DOM 操作。大多数情况下，最好是把模板作为代码复用的抽象层。</p>
+<h2 id="自定义指令-简化"><a href="#自定义指令-简化" class="headerlink" title="自定义指令 简化"></a>自定义指令 <sup>简化</sup></h2><p>在新版中，指令的使用范围已经大大减小了：现在指令仅仅被用于低级的 DOM 操作。大多数情况下，最好是使用组件作为代码复用的抽象层。</p>
 <p>显要的改变有如下几点：</p>
 <ul>
 <li>指令不再拥有实例。意思是，在指令的钩子函数中不再拥有实例的 <code>this</code> 。替代的是，你可以在参数中接受你需要的任何数据。如果确实需要，可以通过 <code>el</code> 来访问实例。</li>
@@ -1320,7 +1333,7 @@ new Vue({
     
       <div class="guide-links">
         
-          <span>← <a href="/v2/guide/ssr.html">服务端渲染</a></span>
+          <span>← <a href="/v2/guide/typescript.html">TypeScript Support</a></span>
         
         
           <span style="float:right"><a href="/v2/guide/migration-vue-router.html">从 Vue Router 0.7.x 迁移</a> →</span>

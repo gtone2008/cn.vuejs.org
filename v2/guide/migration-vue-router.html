@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <title>从 Vue Router 0.7.x 迁移 - Vue.js</title>
         <meta charset="utf-8">
@@ -169,7 +169,7 @@
         <div class="main-sponsor">
             <span>赞助者</span><br>
             <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-3.jpg">
+                <img src="/images/upyun-main-4.jpg">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -508,6 +508,19 @@
                     
                     
                     
+                    
+                
+                
+                <li>
+                    <a href="/v2/guide/typescript.html" class="sidebar-link">TypeScript Support</a>
+                </li>
+            
+                
+
+                
+                    
+                    
+                    
                       <li><h3>迁移</h3></li>
                     
                     
@@ -673,15 +686,14 @@
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-link</span>=<span class="string">"'/about'"</span>&gt;</span>About<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>你需要把它更新成：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/about"</span>&gt;</span>About<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>Note that <code>target=&quot;_blank&quot;</code> is not supported on <code>&lt;router-link&gt;</code>, so if you need to open a link in a new tab, you have to use <code>&lt;a&gt;</code> instead.</p>
+<p>注意：<code>&lt;router-link&gt;</code>不支持<code>target=&quot;_blank&quot;</code>属性，如果你想打开一个新标签页，你必须用<code>&lt;a&gt;</code>标签。</p>
 
 <div class="upgrade-path">
   <h4>升级路径</h4>
   <p>运行 <a href="https://github.com/vuejs/vue-migration-helper" target="_blank" rel="external">迁移助手</a> 找到 <code>v-link</code> 指令的示例。</p>
 </div>
 
-<h3 id="v-link-active-替换"><a href="#v-link-active-替换" class="headerlink" title="v-link-active 替换"></a><code>v-link-active</code> <sup>替换</sup></h3><p>The <code>v-link-active</code> directive has also been replaced by the <code>tag</code> attribute on <a href="http://router.vuejs.org/en/api/router-link.html" target="_blank" rel="external">the <code>&lt;router-link&gt;</code> component</a>. So for example, you’ll update this:</p>
-<p><code>v-link-active</code>也因为指定了一个在<a href="http://router.vuejs.org/en/api/router-link.html" target="_blank" rel="external"> <code>&lt;router-link&gt;</code> 组件</a>上的 tag 属性而被弃用了。举个例子，你需要更新：</p>
+<h3 id="v-link-active-替换"><a href="#v-link-active-替换" class="headerlink" title="v-link-active 替换"></a><code>v-link-active</code> <sup>替换</sup></h3><p><code>v-link-active</code>也因为指定了一个在<a href="http://router.vuejs.org/en/api/router-link.html" target="_blank" rel="external"> <code>&lt;router-link&gt;</code> 组件</a>上的 tag 属性而被弃用了。举个例子，你需要更新：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-link-active</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-link</span>=<span class="string">"'/about'"</span>&gt;</span>About<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>成这个写法:</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">tag</span>=<span class="string">"li"</span> <span class="attr">to</span>=<span class="string">"/about"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">a</span>&gt;</span>About<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></div></pre></td></tr></table></figure>

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <title>过渡效果 - Vue.js</title>
         <meta charset="utf-8">
@@ -169,7 +169,7 @@
         <div class="main-sponsor">
             <span>赞助者</span><br>
             <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-3.jpg">
+                <img src="/images/upyun-main-4.jpg">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -508,6 +508,19 @@
                     
                     
                     
+                    
+                
+                
+                <li>
+                    <a href="/v2/guide/typescript.html" class="sidebar-link">TypeScript Support</a>
+                </li>
+            
+                
+
+                
+                    
+                    
+                    
                       <li><h3>迁移</h3></li>
                     
                     
@@ -600,7 +613,7 @@
 <p>这里是一个典型的例子：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"show = !show"</span>&gt;</span></div><div class="line">    Toggle</div><div class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#demo'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">show</span>: <span class="literal">true</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.fade-enter-active</span>, <span class="selector-class">.fade-leave-active</span> &#123;</div><div class="line">  <span class="attribute">transition</span>: opacity .<span class="number">5s</span></div><div class="line">&#125;</div><div class="line"><span class="selector-class">.fade-enter</span>, <span class="selector-class">.fade-leave-active</span> &#123;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.fade-enter-active</span>, <span class="selector-class">.fade-leave-active</span> &#123;</div><div class="line">  <span class="attribute">transition</span>: opacity .<span class="number">5s</span></div><div class="line">&#125;</div><div class="line"><span class="selector-class">.fade-enter</span>, <span class="selector-class">.fade-leave-to</span> <span class="comment">/* .fade-leave-active in &lt;2.1.8 */</span> &#123;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
 <div id="demo">
   <button v-on:click="show = !show">
@@ -631,20 +644,24 @@ new Vue({
 <ol>
 <li><p>自动嗅探目标元素是否应用了 CSS 过渡或动画，如果是，在恰当的时机添加/删除 CSS 类名。</p>
 </li>
-<li><p>如果过渡组件提供了 <a href="#JavaScript-Hooks">JavaScript 钩子函数</a>，这些钩子函数将在恰当的时机被调用。</p>
+<li><p>如果过渡组件提供了 <a href="#JavaScript-钩子">JavaScript 钩子函数</a>，这些钩子函数将在恰当的时机被调用。</p>
 </li>
-<li><p>如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作（插入/删除）在下一帧中立即执行。(注意：此指浏览器逐帧动画机制，与 Vue，和Vue的 <code>nextTick</code> 概念不同)</p>
+<li><p>如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作（插入/删除）在下一帧中立即执行。(注意：此指浏览器逐帧动画机制，和Vue的 <code>nextTick</code> 概念不同)</p>
 </li>
 </ol>
-<h3 id="过渡的-CSS-类名"><a href="#过渡的-CSS-类名" class="headerlink" title="过渡的-CSS-类名"></a>过渡的-CSS-类名</h3><p>会有 4 个(CSS)类名在 enter/leave 的过渡中切换</p>
+<h3 id="过渡的-CSS-类名"><a href="#过渡的-CSS-类名" class="headerlink" title="过渡的-CSS-类名"></a>过渡的-CSS-类名</h3><p>会有 6 个(CSS)类名在 enter/leave 的过渡中切换</p>
 <ol>
 <li><p><code>v-enter</code>: 定义进入过渡的开始状态。在元素被插入时生效，在下一个帧移除。</p>
 </li>
-<li><p><code>v-enter-active</code>: 定义进入过渡的结束状态。在元素被插入时生效，在 <code>transition/animation</code> 完成之后移除。</p>
+<li><p><code>v-enter-active</code>: 定义过渡的状态。在元素整个过渡过程中作用，在元素被插入时生效，在 <code>transition/animation</code> 完成之后移除。 这个类可以被用来定义过渡的过程时间，延迟和曲线函数。</p>
+</li>
+<li><p><code>v-enter-to</code>: <strong>2.1.8版及以上</strong> 定义进入过渡的结束状态。在元素被插入一帧后生效（于此同时 <code>v-enter</code> 被删除），在 <code>transition/animation</code> 完成之后移除。</p>
 </li>
 <li><p><code>v-leave</code>:  定义离开过渡的开始状态。在离开过渡被触发时生效，在下一个帧移除。</p>
 </li>
-<li><p><code>v-leave-active</code>: 定义离开过渡的结束状态。在离开过渡被触发时生效，在 <code>transition/animation</code> 完成之后移除。</p>
+<li><p><code>v-leave-active</code>: 定义过渡的状态。在元素整个过渡过程中作用，在离开过渡被触发后立即生效，在 <code>transition/animation</code> 完成之后移除。 这个类可以被用来定义过渡的过程时间，延迟和曲线函数。</p>
+</li>
+<li><p><code>v-leave-to</code>: <strong>2.1.8版及以上</strong> 定义离开过渡的结束状态。在离开过渡被触发一帧后生效（于此同时 <code>v-leave</code> 被删除），在 <code>transition/animation</code> 完成之后移除。</p>
 </li>
 </ol>
 <p><img src="/images/transition.png" alt="Transition Diagram"></p>

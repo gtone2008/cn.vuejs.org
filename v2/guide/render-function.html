@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <title>Render 函数 - Vue.js</title>
         <meta charset="utf-8">
@@ -169,7 +169,7 @@
         <div class="main-sponsor">
             <span>赞助者</span><br>
             <a href="https://www.upyun.com/league?utm_source=vue&utm_medium=ad&utm_content=con" target="_blank">
-                <img src="/images/upyun-main-3.jpg">
+                <img src="/images/upyun-main-4.jpg">
             </a>
         </div>
         <a class="become-backer" href="/support-vuejs">
@@ -508,6 +508,19 @@
                     
                     
                     
+                    
+                
+                
+                <li>
+                    <a href="/v2/guide/typescript.html" class="sidebar-link">TypeScript Support</a>
+                </li>
+            
+                
+
+                
+                    
+                    
+                    
                       <li><h3>迁移</h3></li>
                     
                     
@@ -592,7 +605,7 @@
 <p>在这种场景中使用 template 并不是最好的选择：首先代码冗长，为了在不同级别的标题中插入锚点元素，我们需要重复地使用 <code>&lt;slot&gt;&lt;/slot&gt;</code>。其次由于组件必须有根节点，标题和锚点元素被包裹在了一个无用的 <code>div</code> 中。</p>
 <p>虽然模板在大多数组件中都非常好用，但是在这里它就不是很简洁的了。那么，我们来尝试使用 <code>render</code> 函数重写上面的例子：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.component(<span class="string">'anchored-heading'</span>, &#123;</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> createElement(</div><div class="line">      <span class="string">'h'</span> + <span class="keyword">this</span>.level,   <span class="comment">// tag name 标签名称</span></div><div class="line">      <span class="keyword">this</span>.$slots.default <span class="comment">// 子组件中的阵列</span></div><div class="line">    )</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">props</span>: &#123;</div><div class="line">    <span class="attr">level</span>: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">      <span class="attr">required</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>简单清晰很多！简单来说，这样代码精简很多，但是需要非常熟悉 Vue 的实例属性。在这个例子中，你需要知道当你不使用 <code>slot</code>  属性向组件中传递内容时，比如 <code>anchored-heading</code> 中的 <code>Hello world!</code>, 这些子元素被存储在组件实例中的 <code>$slots.default</code>中。如果你还不了解，<strong> 在深入 render 函数之前推荐阅读 <a href="../api/#vm-slots">instance properties API</a>。</strong></p>
+<p>简单清晰很多！简单来说，这样代码精简很多，但是需要非常熟悉 Vue 的实例属性。在这个例子中，你需要知道当你不使用 <code>slot</code>  属性向组件中传递内容时，比如 <code>anchored-heading</code> 中的 <code>Hello world!</code>, 这些子元素被存储在组件实例中的 <code>$slots.default</code>中。如果你还不了解，<strong> 在深入 render 函数之前推荐阅读 <a href="../api/#vm-slots">实例属性API</a>。</strong></p>
 <h2 id="createElement-参数"><a href="#createElement-参数" class="headerlink" title="createElement 参数"></a><code>createElement</code> 参数</h2><p>第二件你需要熟悉的是如何在 <code>createElement</code> 函数中生成模板。这里是 <code>createElement</code> 接受的参数：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// @returns &#123;VNode&#125;</span></div><div class="line">createElement(</div><div class="line">  <span class="comment">// &#123;String | Object | Function&#125;</span></div><div class="line">  <span class="comment">// 一个 HTML 标签字符串，组件选项对象，或者一个返回值类型为String/Object的函数，必要参数</span></div><div class="line">  <span class="string">'div'</span>,</div><div class="line"></div><div class="line">  <span class="comment">// &#123;Object&#125;</span></div><div class="line">  <span class="comment">// 一个包含模板相关属性的数据对象</span></div><div class="line">  <span class="comment">// 这样，您可以在 template 中使用这些属性.可选参数.</span></div><div class="line">  &#123;</div><div class="line">    <span class="comment">// (详情见下一节)</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="comment">// &#123;String | Array&#125;</span></div><div class="line">  <span class="comment">// 子节点(VNodes)，可以是一个字符串或者一个数组. 可选参数.</span></div><div class="line">  [</div><div class="line">    createElement(<span class="string">'h1'</span>, <span class="string">'hello world'</span>),</div><div class="line">    createElement(MyComponent, &#123;</div><div class="line">      <span class="attr">props</span>: &#123;</div><div class="line">        <span class="attr">someProp</span>: <span class="string">'foo'</span></div><div class="line">      &#125;</div><div class="line">    &#125;),</div><div class="line">    <span class="string">'bar'</span></div><div class="line">  ]</div><div class="line">)</div></pre></td></tr></table></figure>
 <h3 id="深入data-object参数"><a href="#深入data-object参数" class="headerlink" title="深入data object参数"></a>深入data object参数</h3><p>有一件事要注意：正如在模板语法中，<code>v-bind:class</code> 和  <code>v-bind:style</code> ，会被特别对待一样，在 VNode 数据对象中，下列属性名是级别最高的字段。</p>
@@ -669,9 +682,9 @@
 <p>这里是一个使用所有修饰符的例子:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">on: &#123;</div><div class="line">  <span class="attr">keyup</span>: <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">    <span class="comment">// 如果触发事件的元素不是事件绑定的元素</span></div><div class="line">    <span class="comment">// 则返回</span></div><div class="line">    <span class="keyword">if</span> (event.target !== event.currentTarget) <span class="keyword">return</span></div><div class="line">    <span class="comment">// 如果按下去的不是enter键或者</span></div><div class="line">    <span class="comment">// 没有同时按下shift键</span></div><div class="line">    <span class="comment">// 则返回</span></div><div class="line">    <span class="keyword">if</span> (!event.shiftKey || event.keyCode !== <span class="number">13</span>) <span class="keyword">return</span></div><div class="line">    <span class="comment">// 阻止 事件冒泡</span></div><div class="line">    event.stopPropagation()</div><div class="line">    <span class="comment">// 阻止该元素默认的keyup事件</span></div><div class="line">    event.preventDefault()</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="slots"><a href="#slots" class="headerlink" title="slots"></a>slots</h3><p>你可以从<a href="http://vuejs.org/v2/api/#vm-slots" target="_blank" rel="external"><code>this.$slots</code></a>获取VNodes列表中的静态内容:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</div><div class="line">  <span class="comment">// &lt;div&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/div&gt;</span></div><div class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>, <span class="keyword">this</span>.$slots.default)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>And access scoped slots as functions that return VNodes from <a href="http://vuejs.org/v2/api/#vm-scopedSlots" target="_blank" rel="external"><code>this.$scopedSlots</code></a>:</p>
+<p>还可以从<a href="http://vuejs.org/v2/api/#vm-scopedSlots" target="_blank" rel="external"><code>this.$scopedSlots</code></a> 中获得能用作函数的作用域插槽，这个函数返回 VNodes:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</div><div class="line">  <span class="comment">// &lt;div&gt;&lt;slot :text="msg"&gt;&lt;/slot&gt;&lt;/div&gt;</span></div><div class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>, [</div><div class="line">    <span class="keyword">this</span>.$scopedSlots.default(&#123;</div><div class="line">      <span class="attr">text</span>: <span class="keyword">this</span>.msg</div><div class="line">    &#125;)</div><div class="line">  ])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>To pass scoped slots to a child component using render functions, use the <code>scopedSlots</code> field in VNode data:</p>
+<p>如果要用 render 函数向子组件中传递作用域插槽，可以利用VNode数据中的 <code>scopedSlots</code>域：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">render (createElement) &#123;</div><div class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>, [</div><div class="line">    createElement(<span class="string">'child'</span>, &#123;</div><div class="line">      <span class="comment">// pass scopedSlots in the data object</span></div><div class="line">      <span class="comment">// in the form of &#123; name: props =&gt; VNode | Array&lt;VNode&gt; &#125;</span></div><div class="line">      scopedSlots: &#123;</div><div class="line">        <span class="attr">default</span>: <span class="function"><span class="keyword">function</span> (<span class="params">props</span>) </span>&#123;</div><div class="line">          <span class="keyword">return</span> createElement(<span class="string">'span'</span>, props.text)</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  ])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>如果你写了很多 <code>render</code>  函数，可能会觉得痛苦：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">createElement(</div><div class="line">  <span class="string">'anchored-heading'</span>, &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">level</span>: <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">  &#125;, [</div><div class="line">    createElement(<span class="string">'span'</span>, <span class="string">'Hello'</span>),</div><div class="line">    <span class="string">' world!'</span></div><div class="line">  ]</div><div class="line">)</div></pre></td></tr></table></figure>
@@ -766,6 +779,10 @@ console.error = function (error) {
 }
 </script>
 <style>
+#vue-compile-demo {
+  -webkit-user-select: inherit;
+  user-select: inherit;
+}
 #vue-compile-demo pre {
   padding: 10px;
   overflow-x: auto;
